@@ -22,15 +22,6 @@ allprojects {
         jcenter()
         
     }
-
-    tasks.withType(Javadoc){
-        //不对生成的doc文档进行检查        
-         options.addStringOption('Xdoclint:none','-quiet')
-        // 设置编码格式        
-         options.addStringOption('encoding','UTF-8')
-    }
-
-
 }
 
 task clean(type: Delete) {

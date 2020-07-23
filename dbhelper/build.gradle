@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-
 group='com.github.YimasoftLiuGuanJun'
 android {
     compileSdkVersion 29
@@ -25,6 +24,5 @@ android {
 }
 
 dependencies {
-//    implementation fileTree(dir: "libs", include: ["*.jar"])
 }
 
