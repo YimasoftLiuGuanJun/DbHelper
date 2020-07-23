@@ -12,8 +12,6 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @ClassName: DbHelper
  * @Description: 数据库工具类
- * @author lhy
- * @date 2014-10-9 下午2:36:41
  *
  */
 public class DbHelper extends SQLiteOpenHelper {
