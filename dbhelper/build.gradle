@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'  //添加
+apply plugin: 'com.github.dcendents.android-maven'
 
+group='com.github.YimasoftLiuGuanJun'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion 17
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0.0"
 
@@ -27,14 +28,3 @@ dependencies {
 //    implementation fileTree(dir: "libs", include: ["*.jar"])
 }
 
-//添加
-publish {
-    userOrg = 'liuguanjunaini'//bintray.com用户名
-    groupId = 'com.sokelish'//jcenter上的路径
-    artifactId = 'dbhelper'//项目名称
-    publishVersion = '1.0.0'//版本号
-    desc = 'just simple dbhelper'//描述，不重要
-    website = 'https://www.baidu.com'//网站，不重要
-}
-//gradlew clean build bintrayUpload -PbintrayUser=liuguanjunaini -PbintrayKey=0f8e0124188b070b1b99ae6bf9791165b7b92ca2 -PdryRun=false
-//gradlew clean build bintrayUpload -PbintrayUser=liuguanjunaini -PbintrayKey=0f8e0124188b070b1b99ae6bf9791165b7b92ca2 -PdryRun=false
