@@ -61,14 +61,17 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createTableStr);
     }
 
-    public void put(String key,String val){
+    /**
+     * 目前只支持 int,bool,long类型的数据请勿存其他数据
+     * @param key
+     * @param val
+     */
+    public void put(String key,Object val){
         try{
             ContentValues contentValues = new ContentValues();
             contentValues.put(VALUE_KEY,key);
-            contentValues.put(VALUE_VAL,val);
-//            Log.d("put",val+"  锁的hashCode:"+lock.hashCode());
+            contentValues.put(VALUE_VAL,val.toString());
             lock.lock();
-//            Log.d("put---进入锁了",val);
             if(get(key)!=null){
                 update(TABLE_NAME,contentValues,VALUE_KEY+" = ?",new String[]{key});
             }else {
@@ -78,10 +81,8 @@ public class DbHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }finally {
             lock.unlock();
-//            Log.d("put---释放了锁",val);
         }
     }
-
 
     public String get(String key,String defaultVal){
         String result = get(key);
@@ -90,6 +91,48 @@ public class DbHelper extends SQLiteOpenHelper {
         }else {
             return result;
         }
+    }
+
+    public int getInt(String key,int defaultVal){
+        String result = get(key);
+        if( result == null){
+            return defaultVal;
+        }else {
+            try{
+                return Integer.valueOf(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return defaultVal;
+    }
+
+    public boolean getBool(String key,boolean defaultVal){
+        String result = get(key);
+        if( result == null){
+            return defaultVal;
+        }else {
+            try {
+                return Boolean.valueOf(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return defaultVal;
+    }
+
+    public long getLong(String key,long defaultVal){
+        String result = get(key);
+        if( result == null){
+            return defaultVal;
+        }else {
+            try {
+                return Long.valueOf(result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return defaultVal;
     }
 
     public String get(String key){
