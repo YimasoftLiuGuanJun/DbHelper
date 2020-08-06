@@ -136,20 +136,23 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     public String get(String key){
+        String returnStr = null;
+        Cursor cursor = null;
         try{
             lock.lock();
-            Cursor cursor = query(TABLE_NAME,"where "+VALUE_KEY +" = '"+key+"'");
+            cursor = query(TABLE_NAME,"where "+VALUE_KEY +" = '"+key+"'");
             if(cursor.getCount()==1){
                 cursor.moveToFirst();
                 int index = cursor.getColumnIndex(VALUE_VAL);
-                return cursor.getString(index);
+                returnStr =  cursor.getString(index);
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
+            cursor.close();
             lock.unlock();
         }
-        return null;
+        return returnStr;
     }
 
     /**
@@ -284,7 +287,6 @@ public class DbHelper extends SQLiteOpenHelper {
      * @return
      * Cursor
      * @exception:
-     * @author: lihy
      * @time:2015-4-3 上午9:37:29
      */
     private Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having,
